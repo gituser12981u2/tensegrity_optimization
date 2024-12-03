@@ -1,6 +1,7 @@
 import numpy as np
 from typing import Dict, Callable
 from src.core.tensegrity_system import TensegritySystem
+from src.physics.constraints import PhysicsConstraints
 
 
 class DynamicsSimulator:
@@ -10,6 +11,7 @@ class DynamicsSimulator:
         self.system = system
         self.dt = dt
         self.time = 0.0
+        self.constraints = PhysicsConstraints(system)
         # Additional forces by node ID
         self.external_forces: Dict[int, Callable] = {}
 
@@ -43,6 +45,15 @@ class DynamicsSimulator:
                 # Update velocity using average of old and new acceleration
                 node.velocity += 0.5 * \
                     (old_acceleration + node.acceleration) * self.dt
+
+        # Enforce physical constraints
+        self.constraints.enforce_constraints()
+
+        # Check stability
+        if not self.constraints.is_stable():
+            # Apply additional damping if system is unstable
+            for node in self.system.nodes:
+                node.velocity *= 0.95  # Additional velocity damping
 
             self.time += self.dt
 

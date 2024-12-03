@@ -1,6 +1,5 @@
 # examples/dynamic_simulation.py
 import numpy as np
-import time
 from src.core.tensegrity_system import TensegritySystem
 from src.physics.dynamics import DynamicsSimulator, EnergyAnalyzer
 from src.visualization.interactive import InteractiveVisualizer
