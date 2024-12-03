@@ -10,8 +10,8 @@ class PhysicsConstraints:
     def __init__(self, system: TensegritySystem):
         self.system = system
         self.equilibrium_tolerance = 1e-6
-        self.max_tension = 1000.0  # Material property
-        self.max_compression = 1000.0  # Material property
+        self.max_tension = 2000.0  # 2kN for steel cables
+        self.max_compression = 1000.0  # 1 kN for aluminum struts
 
     def enforce_constraints(self) -> None:
         """Enforce all physical constraints on the system."""
