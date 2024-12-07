@@ -59,12 +59,11 @@ def create_tensegrity_prism(height: float = 1.0, radius: float = 1.0):
 def add_perturbation(system: TensegritySystem):
     """Add a very small initial velocity perturbation to the top nodes."""
     for node in system.nodes[:3]:  # First three nodes (top triangle)
-        # Even smaller initial velocity
         node.velocity = np.array([0.0001, 0.0001, 0])
 
 
 class TensegrityAnimation:
-    def __init__(self, timesteps=5000, dt=0.000001):  # Much smaller timestep
+    def __init__(self, timesteps=5000, dt=0.000001):
         """Initialize the animation."""
         self.system = create_tensegrity_prism()
         self.simulator = DynamicsSimulator(self.system, dt=dt)
