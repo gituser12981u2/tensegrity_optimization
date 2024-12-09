@@ -29,8 +29,8 @@ def create_tensegrity_prism(height: float = 1.0, radius: float = 1.0):
     system.add_strut(n2, n6, stiffness=50.0, damping=2.0)
     system.add_strut(n3, n4, stiffness=50.0, damping=2.0)
 
-    # Add cables with less tension
-    tension_factor = 0.99  # Even less initial tension
+    # Add cables
+    tension_factor = 0.99
 
     # Top triangle cables
     for n_1, n_2 in [(n1, n2), (n2, n3), (n3, n1)]:
